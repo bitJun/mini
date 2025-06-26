@@ -1,0 +1,15 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": ["taro/react", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["react", "@typescript-eslint", "react-hooks"],
+  "rules": {
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "jsx-quotes": ["error", "prefer-double"],
+    "@typescript-eslint/no-explicit-any": false
+  }
+}

@@ -1,0 +1,60 @@
+page{
+  background-color: #101010;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .logo {
+    margin-top: 240px;
+    width: 500px;
+    height: 168px;
+    margin-bottom:20px;
+  }
+
+  .operatingArea {
+    width: 100%;
+    padding: 0 40px;
+    margin-top: 10px;
+    font-size: 28px;
+
+    .quickLogin {
+      width: 100%;
+      height: 88px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color:#E349FF;
+      font-size: 28px;
+      color: #fff;
+    }
+
+    .phoneLogin {
+      margin-top: 20px;
+      width: 100%;
+      height: 88px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #6236FF;
+      font-size: 28px;
+      color: #fff;
+    }
+
+    .noLogin {
+      margin-top: 12px;
+      width: 100%;
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #fff;
+    }
+  }
+}

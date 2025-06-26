@@ -1,0 +1,63 @@
+.myDialog{
+  --dialog-width:100%;
+  --dialog-background-color:#fff;
+  border-radius:32px 32px 0 0;
+  --dialog-message-padding:0 0 64px 0;
+  top:80%;
+  overflow: hidden;
+  .myDialogClosed{
+    position: absolute;
+    top:40px;
+    right: 32px;
+    font-size: 24px;
+    color: #999;
+  }
+  .myDialogBox{
+    margin-top: 104px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    .okStatus{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .checkOk{
+        font-size: 100px;
+      }
+    }
+     .title{
+        margin-top: 48px;
+        font-size: 32px;
+        font-weight: 600;
+      }
+      .desc{
+        margin-top: 64px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .from{
+          color: #999;
+          font-size: 22px;
+          margin-right: 12px;
+        }
+        .icon{
+           font-size: 22px;
+           color: #999;
+        }
+      }
+      .okTest{
+        margin-top: 62px;
+        width: 410px;
+        height: 104px;
+        padding: 20px;
+        border-radius: 60px;
+        background: #000; 
+        color: #fff;
+        text-align: center;
+      }
+  }
+}

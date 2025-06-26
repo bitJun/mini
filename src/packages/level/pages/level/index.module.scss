@@ -1,0 +1,218 @@
+page {
+  width: 100%;
+  height: 100%;
+  background-color: #101010;
+}
+.level {
+  width: 100%;
+  height: calc(100% - 88px);
+  overflow: hidden;
+  overflow-y: auto;
+  .mesTopBox{
+    width: calc(100% - 64px);
+    padding: 32px;
+    border-radius: 32px;
+    background-color: #2E2E2E;
+    margin-left: 32px;
+    margin-top: 16px;
+    display: block;
+    .mesTopAvatar{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap:24px;
+      .imageStyle{
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+      }
+      .mesTopAvaRight{
+        width: calc(100% - 236px);
+        color: #fff;
+        margin-left: 36px;
+        .mesTopAvaRightNav{
+          font-size: 32px;
+          font-weight: 600;
+          line-height: 68px;
+        }
+      }
+    }
+    .mesTopScope{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap:24px;
+      margin-top: 32px;
+      .mesTopScopeBox{
+        width: calc(50% - 12px);
+        background-color: #101010;
+        border-radius: 56px;
+        color: #F3D2A6;
+        line-height: 100px;
+        font-size: 30px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap:12px;
+        justify-content: center;
+        .mesTopScopeBoxImg{
+          width: 40px;
+          height: 30px;
+        }
+      }
+    }
+  }
+  .mesMidBox{
+    width: 100%;
+    padding: 32px;
+    color: rgba(255, 255, 255, 0.7);
+    .mesMidBoxTitle{
+      margin-bottom: 36px;
+    }
+  }
+  .vipLevelBar {
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  .levelLine {
+    position: relative;
+    width: 100%;
+    height: 28px;
+    background-color: #2e2e2e;
+    border-radius: 12px;
+    margin: 20px 0;
+  }
+  
+  .levelDot {
+    position: absolute;
+    transform: translateX(-50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top:-8px;
+    z-index: 2;
+  }
+  .dot {
+    width: 46px;
+    height: 46px;
+    background-color: #2e2e2e;
+    border:2px  solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    margin-bottom: 12px;
+  }
+  .dotActive{
+    background-color: #F3D2A6;
+    border:2px  solid #F3D2A6;
+  }
+  .levelLabel {
+    font-size: 28px;
+    color: #F3D2A6;
+  }
+  .currentPointMarker{
+    height: calc(100% - 4px);
+    position: absolute;
+    top: 2px;
+    left: 0;
+    background-color: #F3D2A6;
+    border-radius: 16px;
+    z-index: 1;
+  }
+  .mesMidBoxT{
+    width: 100%;
+    padding: 32px;
+    padding-bottom: 0;
+    .mesMidBoxTitle{
+      width: 100%;
+      text-align: center;
+      line-height: 72px;
+      color: #F3D2A6;
+      font-size: 32px;
+    }
+  }
+  .permissionBox{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap:36px;
+    .permissionBoxChild{
+      width: 134px;
+      .permissionBoxImg{
+        width: 130px;
+        height: 130px;
+        border: 4px  solid  #F3D2A6;
+        border-radius: 50%;
+        position: relative;
+        background-color: #2E2E2E;
+        .img{
+          width: 72px;
+          height: 72px;
+          position: absolute;
+          top:50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+        }
+      }
+      .name{
+        width: 100%;
+        text-align: center;
+        line-height: 64px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 32px;
+      }
+    }
+  }
+  .nextLevel{
+    width: 100%;
+    color: #fff;
+    line-height: 72px;
+  }
+  .mesMidBoxB{
+    width: 100%;
+    padding: 32px;
+    padding-top: 0;
+    .mesMidBoxTitle{
+      width: 100%;
+      text-align: center;
+      color: #F3D2A6;
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+    .improve{
+      width: 100%;
+      background-color: #2E2E2E;
+      padding: 28px;
+      border-radius: 12px;
+      border: 4px  solid #F3D2A6;
+      .improveChild{
+        width: 100%;
+        border-radius: 56px;
+        line-height: 72px;
+        background-color: #101010;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #F3D2A6;
+        margin-bottom: 16px;
+        padding-left: 32px;
+        padding-right: 8px;
+        &:last-child{
+          margin-bottom: 0;
+        }
+        .improveChildBtn{
+          background-color: #F3D2A6;
+          color: #101010;
+          height: 100%;
+          padding: 0 32px;
+          border-radius: 56px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

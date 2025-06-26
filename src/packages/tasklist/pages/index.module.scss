@@ -1,0 +1,66 @@
+page {
+  width: 100%;
+  height: 100%;
+}
+.taskList{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto;
+  padding: 32px;
+  padding-right: 0;
+  color: #000;
+  box-sizing: border-box;
+  .listsBox{
+    width: 100%;
+    padding-right: 32px;
+  }
+  .imageStyle{
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+  }
+  .lists{
+    margin-top: 36px;
+    width: 100%;
+    border-bottom: 2px  solid #F1F1F1;
+    &:last-child{
+      border-bottom: none;
+    }
+    .listsT{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .listsTL{
+        font-weight: 600;
+      }
+      .listsTR{
+        color: #999;
+        font-size: 22px;
+        .statusOk{
+          display: flex;
+          align-items: center;
+          .statusOkL{
+            background: #1510FF;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+          }
+          .statusOkR{
+            color: #000;
+          }
+        }
+      }
+    }
+    .listsB{
+      width: 100%;
+      margin-top: 24px;
+      color: #999;
+      margin-bottom: 40px;
+      font-size: 24px;
+    }
+  }
+}
+

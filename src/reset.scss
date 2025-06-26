@@ -1,0 +1,45 @@
+view,
+scroll-view {
+  font-family: "PingFang SC";
+  box-sizing: border-box;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  &::after {
+    border: none;
+  }
+}
+.backBtn{
+  color:#fff;
+  font-weight: bold;
+}
+.dialog-page{
+  background: #2e2e2e !important;
+  color: #fff !important;
+  .taroify-dialog__message{
+    color: #fff !important;
+  }
+  .taroify-button--text.taroify-button--default {
+    color: #fff !important;
+  }
+  .taroify-dialog__confirm:active {
+    color: #6236FF !important;
+  }
+  .taroify-dialog__footer .taroify-dialog__confirm, .taroify-dialog__footer .taroify-dialog__confirm:active {
+    color: #6236FF !important;
+    border-left: 1px  solid  #101010;
+  }
+  .taroify-hairline--top::after {
+    border-top-color: #101010 !important;
+   }
+}
+.dialog-page-content{
+  color: #fff !important;
+}
+.dialog-page-1{
+  background: #101010 !important;
+}

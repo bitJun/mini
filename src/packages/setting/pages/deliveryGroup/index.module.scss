@@ -1,0 +1,114 @@
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 120px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 120px);
+}
+
+.scrollView {
+  flex: 1;
+  padding: 12px 32px;
+  overflow: hidden;
+}
+
+.listItem {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 12px;
+  border: 2px solid #ededed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .listControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .listBtn {
+      margin-left: 12px;
+      color: #A2A2A2;
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 20px;
+  padding: 20px 32px 12px;
+  border-top: 2px solid #ededed;
+
+  .button {
+    flex: 1;
+  }
+}
+
+.popup {
+  width: 100%;
+  height: 70%;
+
+  .popupBox {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .popupContent {
+      flex: 1;
+      overflow: hidden;
+      padding: 12px 32px 40px;
+
+      .popupFlex {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .platformIcon {
+        flex-shrink: 0;
+        margin-right: 12px;
+        width: 40px;
+        height: 40px;
+      }
+
+      .textBtn {
+        color: #A2A2A2;
+      }
+    }
+  }
+}
+
+.operatingArea {
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+
+  .cancel {
+    height: 100%;
+    padding: 0 32px;
+    font-size: 28px;
+    color: #969799;
+    display: flex;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 32px;
+    color: #000;
+  }
+
+  .confirm {
+    height: 100%;
+    padding: 0 32px;
+    font-size: 28px;
+    color: #1989fa;
+    display: flex;
+    align-items: center;
+  }
+}

@@ -1,0 +1,53 @@
+.myDialog{
+  background-color: #2E2E2E;
+  color:#F3D2A6;
+  .myDialogContent{
+    width: 100%;
+    .myDialogContentC{
+      width: 100%;
+      display: flex;
+      background-color: #101010;
+      border-radius: 36px;
+      color: #F3D2A6;
+      align-items: center;
+      justify-content: space-between;
+      line-height: 72px;
+      padding: 8px 24px;
+      margin-bottom: 12px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+    .myDialogContentCC{
+      width: 100%;
+      display: flex;
+      background-color: #101010;
+      border-radius: 36px;
+      color: #F3D2A6;
+      align-items: center;
+      justify-content: space-between;
+      line-height: 96px;
+      padding: 0 24px;
+      margin-bottom: 12px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+    .active{
+      border: 2px  solid  #F3D2A6;
+    }
+    .myDialogBtn{
+      width: 100%;
+      gap: 24px;
+      background-color: #F3D2A6;
+      padding: 0 24px;
+      height: 84px;
+      line-height: 84px;
+      font-size: 32px;
+      border-radius: 56px;
+      margin-top: 24px;
+      color: #101010;
+      text-align: center;
+    }
+  }
+}

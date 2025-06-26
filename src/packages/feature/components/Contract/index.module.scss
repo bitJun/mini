@@ -1,0 +1,16 @@
+.contract {
+  margin-top: 30px;
+  font-size: 26px;
+  color: #fff;
+  .selfStyle{
+    --checkbox-checked-icon-color:#fff;
+    --checkbox-checked-icon-border-color: #6236FF;
+    --checkbox-checked-icon-background-color: #6236FF;
+  }
+  .selfColor{
+    color: #fff;
+  }
+  .link {
+    color: #6236FF;
+  }
+}

@@ -1,0 +1,104 @@
+.myDialog{
+  --dialog-width:100%;
+  --dialog-background-color:#2e2e2e;
+  border-radius:24px 24px 0 0;
+  --dialog-message-padding:36px;
+  --dialog-message-max-height:77.5vh;
+  top:62.5%;
+  .logo {
+    width: 398px;
+    height: 135px;
+  }
+  .phoneBoxTop{
+    color: #fff;
+    width: 100%;
+    margin-top: 16px;
+    .phoneBoxTitle{
+      width: 100%;
+      font-size: 48px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .phoneCorrect{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .phoneCorrectLeft{
+        width: 280px;
+        height: 360px;
+        background: #fff;
+        margin-right: 24px;
+        border-radius:12px;
+        .phoneCorrectLeftImg{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius:12px;
+        }
+      }
+      .phoneCorrectRight{
+        width: calc(100% - 304px);
+        height: 360px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        .phoneCorrectRightBox{
+          width: 100%;
+          height: 72px;
+          display: flex;
+          align-items: center;
+          line-height: 72px;
+          gap:12px;
+          .phoneCorrectRightIcon{
+            color:#3EE40D;
+            font-weight: bolder;
+          }
+        }
+      }
+    }
+    .phoneTitleError{
+      width: 100%;
+      display: flex;
+      gap:16px;
+      .phoneTitleBox{
+        width: calc(25% - 16px);
+        .phoneCorrectLittleImg{
+          width: 100%;
+          height: 160px;
+          border-radius: 6px;
+        }
+        .phoneCorrectLittleNav{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 8px;
+        }
+      }
+    }
+  }
+  .phoneTitle{
+    width: 100%;
+    line-height: 88px;
+    text-align: left;
+  }
+  .phoneBoxBottom{
+    color: #fff;
+    width: 100%;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .btnOk{
+      width: 40%;
+      line-height: 84px;
+      text-align: center;
+      background-color: #6236FF;
+      color: #fff;
+      border-radius: 56px;
+    }
+  }
+}
+.myDialogR{
+  top:61%;
+}

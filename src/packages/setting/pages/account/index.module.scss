@@ -1,0 +1,65 @@
+.cellItem {
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.vertical {
+  display: inline-block;
+  margin: 0 20px;
+  width: 2px;
+  height: 36px;
+  background-color: #eee;
+}
+
+.textBtn {
+  padding: 12px 0;
+  color: #A2A2A2;
+}
+
+.dialogItem {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  .label {
+    width: 100px;
+    margin-right: 20px;
+  }
+  .content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .input {
+    flex: 1;
+    text-align: left;
+  }
+  .button {
+    width: 180px;
+  }
+}
+
+.popupTitle {
+  width: 100%;
+  height: 60px;
+  padding-left: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .title {
+    margin-top: 24px;
+  }
+}
+
+.popupContent {
+  padding: 32px;
+}
+
+.popupImage {
+  width: 500px;
+  height: 500px;
+}
