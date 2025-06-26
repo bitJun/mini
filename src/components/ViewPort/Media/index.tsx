@@ -35,7 +35,7 @@ const Media: React.FC<IMediaProps> = (props) => {
             }}></Image>
            }
            {
-            isPaused && id == media.id ? <Video  
+            isPaused && id == media.id ? <Video
               key={id}
               autoplay={true}
               controls={false}
@@ -44,7 +44,7 @@ const Media: React.FC<IMediaProps> = (props) => {
               initialTime={0}
               showCenterPlayBtn={false}
               enablePlayGesture={true}
-              src={media.http_img_path} 
+              src={media.http_img_path}
               className={styles.video}
               onPlay={handlePlay}
               onPause={handlePause}

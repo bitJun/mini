@@ -1,7 +1,212 @@
 page {
   width: 100%;
   height: 100%;
+  background: #ffffff;
 }
 .generation {
-  width: 100%;
+  padding: 48px 0 0 32px;
+  &_digital {
+    display: flex;
+    align-items: center;
+    height: 96px;
+    position: relative;
+    margin-bottom: 48px;
+    width: 686px;
+    &_img {
+      width: 88px;
+      height: 88px;
+      border-radius: 100%;
+    }
+    &_main {
+      margin-left: 24px;
+      width: 416px;
+      &_title {
+        font-family: PingFang SC;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 40px;
+        color: #000000;
+        margin-bottom: 16px;
+      }
+      &_desc {
+        height: 24px;
+        font-family: PingFang SC;
+        font-size: 24px;
+        color: #999999;
+      }
+    }
+    &_icon {
+      width: 96px;
+      height: 96px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  &_box {
+    display: flex;
+    align-items: center;
+    height: 104px;
+    border-radius: 52px;
+    border: 0.5px solid #000000;
+    position: relative;
+    padding: 0 32px;
+    margin-bottom: 32px;
+    width: 686px;
+    &_icon {
+      width: 36px;
+      height: 36px;
+    }
+    &_search {
+      margin-left: 24px;
+      width: 500px;
+      font-family: PingFang SC;
+      font-size: 24px;
+      text-align: left;
+      color: #000000;
+    }
+    &_clear {
+      width: 48px;
+      height: 48px;
+      position: absolute;
+      right: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  &_tags {
+    box-sizing: border-box;
+    display: -webkit-box;
+    overflow-x: scroll;
+    white-space: nowrap;
+    &_item {
+      height: 64px;
+      padding: 0 24px;
+      box-sizing: border-box;
+      background: #EFEFEF;
+      border-radius: 80px;
+      display: inline-block;
+      margin-right: 24px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      font-size: 24px;
+      color: #999999;
+      line-height: 64px;
+    }
+  }
+  &_digitalAssets {
+    margin-top: 84px;
+    &_title {
+      height: 32px;
+      padding-right: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: PingFang SC;
+      font-weight: bold;
+      font-size: 32px;
+      color: #000000;
+      margin-bottom: 32px;
+      &_time {
+        font-family: PingFang SC;
+        font-weight: 400;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        color: #999999;
+      }
+      &_time::before {
+        content: '';
+        margin-right: 12px;
+        width: 8px;
+        height: 8px;
+        background: #542AFE;
+        border-radius: 100%;
+      }
+    }
+    &_container {
+      display: flex;
+      flex-wrap: wrap;
+      &_section {
+        margin-left: 24px;
+        margin-bottom: 28px;
+        width: 332px;
+        height: 336px;
+        border-radius: 32px;
+        padding: 4px;
+        box-sizing: border-box;
+        position: relative;
+        &_icon {
+          width: 36px;
+          height: 36px;
+          position: absolute;
+          top: 24px;
+          right: 24px;
+        }
+        &_box {
+          width: 100%;
+          height: 100%;
+          padding: 28px 0 0 24px;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          &_icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            &_img {
+              width: 26px;
+              height: 26px;
+            }
+          }
+          &_title {
+            font-family: PingFang SC;
+            font-weight: bold;
+            height: 28px;
+            font-size: 28px;
+            margin-bottom: 32px;
+            color: #000000;
+          }
+          &_desc {
+            width: 276px;
+            font-family: PingFang SC;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 140%;
+            color: #999999;
+          }
+        }
+      }
+      &_section:nth-child(2n-1) {
+        margin-left: 0;
+      }
+    }
+  }
+  &_section {
+    margin-top: 64px;
+    &_empty {
+      padding-top: 176px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &_img {
+        width: 274px;
+        height: 246px;
+        margin-bottom: 48px;
+      }
+      &_text {
+        font-family: PingFang SC;
+        font-size: 28px;
+        line-height: 100%;
+        color: #999999;
+      }
+    }
+  }
+}
+.placeholder {
+  color: #999999;
 }

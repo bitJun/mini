@@ -3,6 +3,8 @@ import { useLaunch } from '@tarojs/taro';
 import { Provider } from 'react-redux';
 import { store, storeActions } from '@/store';
 import Taro from '@tarojs/taro';
+import '@nutui/nutui-react-taro/dist/style.css';
+// import '@nutui/nutui-react-taro/dist/styles/themes/default.css';
 import './app.scss';
 import { isLogin } from '@/tools';
 const App: React.FC<PropsWithChildren> = ({ children }) => {
