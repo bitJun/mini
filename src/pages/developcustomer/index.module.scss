@@ -2,31 +2,106 @@ page {
   width: 100%;
   height: 100%;
 }
-
 .container {
   width: 100%;
   height: 100%;
-}
-.custom-tabs {
-  :global(.nut-tabs__titles) {
-    background-color: red;
-  }
-
-  // 修改每个 tab 的样式
-  :global(.nut-tabs__titles-item) {
-    color: #888;
-    font-size: 14px;
-
-    &.active {
-      color: #ff4d00;
+  &_tabs {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 80px;
+    padding-left: 36px;
+    &_item {
+      font-family: PingFang SC;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 100%;
+      color: #999999;
+      position: relative;
+      margin-right: 64px;
+      height: 80px;
+      line-height: 80px;
+    }
+    &_item.active {
+      color: #000000;
       font-weight: bold;
     }
+    &_item.active::after {
+      content: '';
+      width: 58px;
+      height: 1px;
+      background: #000000;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+    &_filiter {
+      position: absolute;
+      right: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      &_icon {
+        width: 40px;
+        height: 40px;
+      }
+      &_menu {
+        width: 344px;
+        position: absolute;
+        right: 0;
+        top: 56px;
+        z-index: 10;
+        border-radius: 24px;
+        border: 1px solid #F1F1F1;
+        background: #ffffff;
+        &_item {
+          height: 92px;
+          border-bottom: 1px solid #F1F1F1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: PingFang SC;
+          font-weight: 400;
+          font-size: 28px;
+          color: #000000;
+        }
+      }
+    }
   }
+}
 
-  // 修改底部滑块线条
-  :global(.nut-tabs__line) {
-    background-color: #ff4d00;
-    height: 3px;
-    border-radius: 2px;
+.clue_empty {
+  padding-top: 208px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &_img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 48px;
+  }
+  &_tip {
+    font-family: PingFang SC;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 100%;
+    color: #999999;
+    margin-bottom: 32px;
+  }
+  &_tips {
+    font-family: PingFang SC;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 140%;
+    color: #999999;
+  }
+  &_guide {
+    margin-top: 32px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 140%;
+    color: #542AFE;
   }
 }
