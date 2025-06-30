@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Router, { _checkLogin } from '@/lib/router';
 import {
   View,
@@ -7,6 +7,7 @@ import {
   ScrollView
 } from '@tarojs/components';
 import styles from './index.module.scss';
+import fetch from '@/lib/request';
 import filiterIcon from '@/assets/developcustomer/filter.png';
 import ClueEmptyIcon from '@/assets/developcustomer/clue_empty.png';
 
@@ -27,6 +28,56 @@ const DevelopCustomer = () => {
   const [noticeList, setNoticeList] = useState<any[]>([]);
   const [noticeEmpty, setNoticeEmpty] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
+  const msgPage = useRef<number>(1);
+  const cluePage = useRef<number>(1);
+  const noticePage = useRef<number>(1);
+  const employeePage = useRef<number>(1);
+
+  useEffect(()=>{
+    onLoadEmployee();
+  }, []);
+
+  useEffect(()=>{
+    if (type == 'msg') {
+      onLoadMsgList()
+    }
+    if (type == 'clue') {
+      onLoadClueList()
+    }
+    if (type == 'notice') {
+      onLoadNotiiceList();
+    }
+  }, [type]);
+
+  const onLoadClueList = () => {
+    let params = {
+      page_size: 10,
+      page_num: cluePage.current
+    }
+    fetch.deliverCustomerMsgClue(params)
+      .then(res=>{
+        console.log('res', res);
+      })
+  }
+
+  const onLoadNotiiceList = () => {
+
+  }
+
+  const onLoadEmployee = () => {
+    let params = {
+      page_size: 10,
+      page_num: employeePage.current
+    }
+    fetch.deliverCustomerMsgEmployee(params)
+      .then(res=>{
+        console.log('employeePage', res);
+      });
+  }
+
+  const onLoadMsgList = () => {
+
+  }
 
   /**
    * tab切换事件

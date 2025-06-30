@@ -726,7 +726,7 @@ const fetch = {
         method: 'GET',
         url: '/wallet/bill',
         params,
-      } as IRequestOptions),  
+      } as IRequestOptions),
     postDeAccount: (params:{
         id: number
         relation_component_id: string
@@ -740,7 +740,7 @@ const fetch = {
       request<Fetch.markInfo>({
         method: 'GET',
         url: '/initiative-marketing/info',
-      } as IRequestOptions), 
+      } as IRequestOptions),
     postMarkSwitch: (params:{
       switch:boolean
     }) =>
@@ -767,7 +767,7 @@ const fetch = {
         method: 'GET',
         params,
         url: '/initiative-marketing/config',
-      } as IRequestOptions), 
+      } as IRequestOptions),
     postInitMarConfig: (
       params:{
         type?:string | 'customer_dig';
@@ -782,13 +782,13 @@ const fetch = {
         method: 'POST',
         params,
         url: '/initiative-marketing/config',
-      } as IRequestOptions), 
+      } as IRequestOptions),
   getInitMarkCus: (params: { page_size: number, page_num:number}) =>
       request<Fetch.InitMarkCus>({
         method: 'GET',
         url: '/initiative-marketing/customer',
         params,
-      } as IRequestOptions),  
+      } as IRequestOptions),
   getInitMarkCusCD: (params: { page_size: number, page_num:number}) =>
     request<Fetch.InitMarkCusCD>({
       method: 'GET',
@@ -805,7 +805,7 @@ const fetch = {
       method: 'POST',
       params,
       url: '/initiative-marketing/follow',
-    } as IRequestOptions),     
+    } as IRequestOptions),
   postInitMarCusReplay: (
       params:{
         id:number;
@@ -816,7 +816,7 @@ const fetch = {
         method: 'POST',
         params,
         url: '/initiative-marketing/customer-reply',
-      } as IRequestOptions), 
+      } as IRequestOptions),
   postWalletComputility: (
         params:{
           num?:number;
@@ -828,7 +828,7 @@ const fetch = {
           method: 'POST',
           params,
           url: '/wallet/computility',
-        } as IRequestOptions), 
+        } as IRequestOptions),
   postDelSendCode: (params: Fetch.IGetDelSendCodeParams) =>
       request<Fetch.ICommonRes>({
         method: 'POST',
@@ -906,5 +906,23 @@ const fetch = {
         url: '/notice/task',
         params
       } as IRequestOptions),
+  deliverCustomerMsgClue: (params: Fetch.IDeliverCustomerClueParams) =>
+    request<Fetch.IDeliverCustomerClueRes>({
+      method: 'GET',
+      url: '/customer-msg/clue',
+      params,
+    } as IRequestOptions),
+  deliverCustomerMsgEmployee: (params: Fetch.IDeliverCustomerClueParams) =>
+    request<Fetch.IDeliverCustomerEmployeeRes>({
+      method: 'GET',
+      url: '/customer-msg/employee',
+      params,
+    } as IRequestOptions),
+  deliverCustomerMsgMessage: (params: Fetch.IDeliverCustomerMessageParams) =>
+    request<Fetch.IDeliverCustomerMessageRes>({
+      method: 'GET',
+      url: '/customer-msg/message',
+      params,
+    } as IRequestOptions),
 };
 export default fetch;

@@ -399,31 +399,31 @@ declare global {
       signature: string;
     };
     type ICustomerLeads = {
-      id: number; 
-      name: string; 
-      last_msg?: string; 
+      id: number;
+      name: string;
+      last_msg?: string;
       last_msg_create_time: string,
-      image: string; 
-      platform:string; 
-      latest_clue_content:string; 
-      latest_clue_time:string; 
+      image: string;
+      platform:string;
+      latest_clue_content:string;
+      latest_clue_time:string;
       user_avatar: string;
       platform_account:{
-        nick_name?: string; 
+        nick_name?: string;
         user_avatar: string;
       },
       deliver_account:{
-        platform?: string; 
+        platform?: string;
       },
     };
-    //  IPaging & 
+    //  IPaging &
     type ICustomerLeadsRes = {
       records: ICustomerLeads[];
     };
     type ISupport = {
       content:string;
       supporter:string;
-      id: number; 
+      id: number;
       end_time:string;
     };
     type ISupportRes = {
@@ -442,7 +442,54 @@ declare global {
       total:number
     };
     type IDeliverCustomerClueResO = IDeliverCustomerClueItem[]
-    type IDeliverCustomerClueParams = { conversation_id: number; page_size: number; page_num: number };
+    type IDeliverCustomerClueParams = { conversation_id?: number; page_size: number; page_num: number };
+    type IDeliverCustomerMessageItemUser = {
+      account_id: string;
+      account_unique_id: string;
+      nickname: string;
+      avatar: string;
+      ip_location: string;
+    }
+    type IDeliverCustomerMessageItemWork = {
+      work_id: number;
+      unique_id: string;
+      work_type: number;
+      cover: string;
+    }
+    type IDeliverCustomerMessageItemMy = {
+      account_id: string;
+      account_unique_id: string;
+      nickname: string;
+      avatar: string;
+      ip_location: string;
+    }
+    type IDeliverCustomerMessageItem = {
+      message_id: string | number;
+      message_type: string | number;
+      original_id: string | number;
+      platform: number;
+      content: string;
+      publish_time: string;
+      user: Array<IDeliverCustomerMessageItemUser>;
+      work: Array<IDeliverCustomerMessageItemWork>;
+      my: Array<IDeliverCustomerMessageItemMy>;
+    };
+    type IDeliverCustomerMessageRes = {
+      records:IDeliverCustomerMessageItem[],
+      total:number
+    };
+    type IDeliverCustomerEmployeeItem = {
+      account_id: string;
+      account_unique_id: string;
+      nickname: string;
+      avatar: string;
+      unread: number
+    }
+    type IDeliverCustomerEmployeeRes = {
+      records:IDeliverCustomerEmployeeItem[],
+      total:number
+    }
+    type IDeliverCustomerMessageParams = { account_id?: number; page_size: number; page_num: number };
     type IWorksData = {
       id:number;
       content:string;
@@ -509,7 +556,7 @@ declare global {
         generate_index:number;
       };
     };
-   
+
     type IQueryMaterialCatItem = {
       cannot_deleted: boolean;
       desc: string;
@@ -582,7 +629,7 @@ declare global {
     type ITask = {
       id:string;
       info:string;
-      status_code: number; 
+      status_code: number;
       status:string;
       estimate_finish_time:string;
     };
@@ -592,11 +639,11 @@ declare global {
       id?:number;
       content?:string;
       publish_time?:string;
-      video_url: string; 
+      video_url: string;
       cover:string | {head_img_path: string},
       type?:string;
       name?:string;
-      title?: string; 
+      title?: string;
       images?:any;
       create_time?:string;
       working_task_id?:string;
@@ -622,12 +669,12 @@ declare global {
       textVal?:string;
       extra_info?:{
         work_id?:number;
-        platform?: string; 
+        platform?: string;
         placeholder?:string;
         platform_info:{
-          chineseName:string; 
-          httpImagePath:string; 
-          platform: string; 
+          chineseName:string;
+          httpImagePath:string;
+          platform: string;
         }
       },
       id:number
@@ -665,7 +712,7 @@ declare global {
       id:number;
       content:string;
       name?:string;
-      title: string; 
+      title: string;
       images?:any;
       create_time:string;
       is_public:boolean;
@@ -876,9 +923,9 @@ declare global {
       min_customer_level:string;
       keyword:string[];
       platform:{
-        chineseName:string; 
-        httpImagePath:string; 
-        platform: string; 
+        chineseName:string;
+        httpImagePath:string;
+        platform: string;
       }[];
       task:string;
       click_status:number,
@@ -892,9 +939,9 @@ declare global {
       id:number;
       level:string;
       platform:{
-        chineseName:string; 
-        httpImagePath:string; 
-        platform: string; 
+        chineseName:string;
+        httpImagePath:string;
+        platform: string;
       },
       account_name:string;
       account_avatar:string;
@@ -915,9 +962,9 @@ declare global {
     type InitMarkCusItemCD = {
       id:number;
       platform:{
-        chineseName:string; 
-        httpImagePath:string; 
-        platform: string; 
+        chineseName:string;
+        httpImagePath:string;
+        platform: string;
       },
       content:string;
       work_url:string;
