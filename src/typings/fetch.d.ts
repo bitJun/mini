@@ -489,7 +489,7 @@ declare global {
       records:IDeliverCustomerEmployeeItem[],
       total:number
     }
-    type IDeliverCustomerMessageParams = { account_id?: number; page_size: number; page_num: number };
+    type IDeliverCustomerMessageParams = { account_id?: number | string; page_size: number; page_num: number };
     type IWorksData = {
       id:number;
       content:string;

@@ -10,6 +10,70 @@ import styles from './index.module.scss';
 import fetch from '@/lib/request';
 import filiterIcon from '@/assets/developcustomer/filter.png';
 import ClueEmptyIcon from '@/assets/developcustomer/clue_empty.png';
+import MsgEmptyIcon from '@/assets/developcustomer/msg_empty.png';
+import employeeEmpty from '@/assets/developcustomer/employee_empty.png';
+import msgEmpty from '@/assets/developcustomer/msg_empty.png';
+import weiboIcon from '@/assets/developcustomer/weibo.png';
+import xhsIcon from '@/assets/developcustomer/xiaohongshu.png';
+import douyinIcon from '@/assets/developcustomer/douyin.png';
+
+interface EmployeeItem {
+  account_id: string;
+  account_unique_id: string;
+  nickname: string;
+  avatar: string;
+  unread: number;
+  platform: number
+}
+
+type IDeliverCustomerMessageItemUser = {
+  account_id: string;
+  account_unique_id: string;
+  nickname: string;
+  avatar: string;
+  ip_location: string;
+}
+type IDeliverCustomerMessageItemWork = {
+  work_id: number;
+  unique_id: string;
+  work_type: number;
+  cover: string;
+}
+type IDeliverCustomerMessageItemMy = {
+  account_id: string;
+  account_unique_id: string;
+  nickname: string;
+  avatar: string;
+  ip_location: string;
+}
+
+interface msgItem {
+  message_id: string | number;
+  message_type: string | number;
+  original_id: string | number;
+  platform: number;
+  content: string;
+  publish_time: string;
+  user: IDeliverCustomerMessageItemUser;
+  work: IDeliverCustomerMessageItemWork;
+  my: IDeliverCustomerMessageItemMy;
+}
+
+interface clueUserItem {
+  account_id: string;
+  account_unique_id: string;
+  avatar: string;
+  ip_location: string;
+  nickname: string;
+}
+
+interface clueItem {
+  clue_id: number;
+  clue_time: string;
+  contact: string;
+  platform: number;
+  user: clueUserItem
+}
 
 definePageConfig({
   navigationBarTitleText: "营销发展员工", // 会被动态覆盖
@@ -19,18 +83,28 @@ definePageConfig({
   enableShareTimeline: true
 });
 
+const platformIcon = {
+  1: xhsIcon,
+  2: douyinIcon,
+  3: weiboIcon
+}
+
 const DevelopCustomer = () => {
   const [type, setType] = useState<string>('msg');
   const [msgList, setMsgList] = useState<any[]>([]);
   const [msgEmpty, setMsgEmpty] = useState<boolean>(false);
   const [clueList, setClueList] = useState<any[]>([]);
-  const [clueEmpty, setClueEmpty] = useState<boolean>(true);
+  const [clueEmpty, setClueEmpty] = useState<boolean>(false);
   const [noticeList, setNoticeList] = useState<any[]>([]);
   const [noticeEmpty, setNoticeEmpty] = useState<boolean>(false);
+  const [employeeList, setEmployeeList] = useState<any[]>([]);
+  const [employeeId, setEmployeeId] = useState<string>('');
   const [show, setShow] = useState<boolean>(false);
   const msgPage = useRef<number>(1);
   const cluePage = useRef<number>(1);
   const noticePage = useRef<number>(1);
+  const [hasMoreMsg, setHasMoreMsg] = useState<boolean>(true);
+  const [hasMoreClue, setHasMoreClue] = useState<boolean>(true);
   const employeePage = useRef<number>(1);
 
   useEffect(()=>{
@@ -38,7 +112,7 @@ const DevelopCustomer = () => {
   }, []);
 
   useEffect(()=>{
-    if (type == 'msg') {
+    if (type == 'msg' && employeeId) {
       onLoadMsgList()
     }
     if (type == 'clue') {
@@ -47,7 +121,7 @@ const DevelopCustomer = () => {
     if (type == 'notice') {
       onLoadNotiiceList();
     }
-  }, [type]);
+  }, [type, employeeId]);
 
   const onLoadClueList = () => {
     let params = {
@@ -57,6 +131,17 @@ const DevelopCustomer = () => {
     fetch.deliverCustomerMsgClue(params)
       .then(res=>{
         console.log('res', res);
+        const [result, error] = res;
+        if (error || !result) return;
+        let arr:any = [];
+        if (cluePage.current == 1) {
+          arr = result.records;
+        } else {
+          arr = [...clueList, result.records];
+        }
+        result.records.length < 10 ? setHasMoreClue(false) : setHasMoreClue(true);
+        cluePage.current == 1 && result.records.length == 0 ? setClueEmpty(true) : setClueEmpty(false);
+        setClueList(arr);
       })
   }
 
@@ -64,6 +149,9 @@ const DevelopCustomer = () => {
 
   }
 
+  /**
+   * 加载智能员工
+   */
   const onLoadEmployee = () => {
     let params = {
       page_size: 10,
@@ -71,12 +159,36 @@ const DevelopCustomer = () => {
     }
     fetch.deliverCustomerMsgEmployee(params)
       .then(res=>{
+        const [result, error] = res;
+        if (error || !result) return;
         console.log('employeePage', res);
+        console.log('result', result);
+        setEmployeeList(result.records);
       });
   }
 
   const onLoadMsgList = () => {
-
+    let params = {
+      account_id: employeeId,
+      page_num: msgPage.current,
+      page_size: 10,
+    }
+    fetch.deliverCustomerMsgMessage(params)
+      .then(res=>{
+        const [result, error] = res;
+        if (error || !result) return;
+        let arr:any = [];
+        if (msgPage.current == 1) {
+          arr = result.records;
+        } else {
+          arr = [...msgList, ...result.records];
+        }
+        setMsgList(arr);
+        result.records.length < 10 ? setHasMoreMsg(false) : setHasMoreMsg(true);
+        msgPage.current == 1 && result.records.length == 0 ? setMsgEmpty(true) : setMsgEmpty(false);
+        console.log('employeePage', res);
+        console.log('result', result);
+      })
   }
 
   /**
@@ -87,18 +199,135 @@ const DevelopCustomer = () => {
     setType(key);
   }
 
+  const onChangeEmployee = (id: string) => {
+    setEmployeeId(id);
+  }
+
   const onRenderMsg = () => {
-    if (msgEmpty) {
+    return (
+      <View className={styles['employee_box']}>
+        {
+          employeeList && employeeList.length > 0 ? (
+            <View className={styles['employee_box_section']}>
+              {
+                employeeList.map((item:EmployeeItem, index:number)=>
+                  <View
+                    className={styles['employee_box_section_main']}
+                    key={Number(item.account_unique_id) * index}
+                    onClick={()=>{
+                      onChangeEmployee(item.account_id)
+                    }}
+                  >
+                    <View className={styles['employee_box_section_main_info']}>
+                      {
+                        item.unread == 1 &&
+                        <View className={styles['employee_box_section_main_info_dot']}></View>
+                      }
+                      <Image
+                        src={item.avatar}
+                        className={`${styles['employee_box_section_main_info_img']} ${item.account_id == employeeId ? `${styles['active']}` : ''}`}
+                      />
+                      {
+                        item.platform &&
+                        <Image
+                          src={platformIcon[item.platform]}
+                          className={styles['employee_box_section_main_info_icon']}
+                        />
+                      }
+                    </View>
+                    <View className={styles['employee_box_section_main_name']}>{item.nickname}</View>
+                  </View>
+                )
+              }
+            </View>
+          ) : (
+            onRenderEmptyEmployee()
+          )
+        }
+        {
+          msgEmpty ? (
+            onRenderMsgEmpty()
+          ) : (
+            <ScrollView
+              scrollY={true}
+              style={{
+                height: `calc(100% - 128rpx)`
+              }}
+            >
+              {
+                msgList.map((item: msgItem) =>
+                  <View 
+                    className={styles['employee_box_item']}
+                    key={item.message_id}
+                  >
+                    <Image
+                      src={item.my.avatar}
+                      className={styles['employee_box_item_img']}
+                    />
+                    <View className={styles['employee_box_item_main']}>
+                      <View className={styles['employee_box_item_main_info']}>
+                        <View className={styles['employee_box_item_main_info_left']}>
+                          <Text className={styles['employee_box_item_main_info_user']}>{item.user.nickname}</Text>
+                          {item.message_type == 1 ? '私信了你' : '回复了你的评论'}
+                        </View>
+                        <View></View>
+                      </View>
+                      <View className={styles['employee_box_item_main_content']}>{item.content}</View>
+                    </View>
+                  </View>
+                )
+              }
+            </ScrollView>
+          )
+        }
+      </View>
+    )
+  }
+
+  const onRenderEmptyEmployee = () => {
+    return (
+      <View className={styles['employee_box_emptys']}>
+        <Image
+          src={employeeEmpty}
+          className={styles['employee_box_emptys_img']}
+        />
+        <View className={styles['employee_box_emptys_tip']}>暂无消息</View>
+        <View className={styles['employee_box_emptys_tips']}>购买设备！发布作品后</View>
+        <View className={styles['employee_box_emptys_tips']}>会把客户消息聚到这儿，等你互动～</View>
+        <View className={styles['employee_box_emptys_guide']}>工作指南</View>
+      </View>
+    ) 
+  }
+
+  const onRenderMsgEmpty = () => {
+    return (
+      <View className={styles['employee_box_empty']}>
+        <Image
+          src={MsgEmptyIcon}
+          className={styles['employee_box_empty_img']}
+        />
+        <Text className={styles['employee_box_empty_tip']}>暂无互动消息</Text>
+      </View>
+    )
+  }
+
+  const onRenderClueUserInfo = (info) => {
+    if (info) {
+      let data = JSON.parse(info);
       return (
-        <View></View>
-      )
-    }
-    else {
-      return (
-        <View></View>
+        <View>
+          {
+            data.map((item:any, index: number) =>
+              <View className={styles['clue_box_main_section_contact']} key={index}>
+                {item.type}：{item.number}
+              </View>
+            )
+          }
+        </View>
       )
     }
   }
+
   const onRenderClue = () => {
     if (clueEmpty) {
       return (
@@ -116,10 +345,42 @@ const DevelopCustomer = () => {
     }
     else {
       return (
-        <View></View>
+        <View>
+          {
+            clueList.map((item: clueItem) => 
+              <View
+                className={styles['clue_box']}
+                key={item.clue_id}
+              >
+                <View className={styles['clue_box_tag']}>A级</View>
+                <View className={styles['clue_box_main']}>
+                  <Image
+                    src={item.user.avatar}
+                    className={styles['clue_box_main_img']}
+                  />
+                  <View className={styles['clue_box_main_section']}>
+                    <View className={styles['clue_box_main_section_info']}>
+                      <Image
+                        src={platformIcon[item.platform]}
+                        className={styles['clue_box_main_section_info_icon']}
+                      />
+                      {item.user.nickname}
+                    </View>
+                    {
+                      item.contact && onRenderClueUserInfo(item.contact)
+                    }
+                  </View>
+                </View>
+                <View className={styles['clue_box_location']}>{item.user.ip_location}</View>
+                <View className={styles['clue_box_contact']}>联系</View>
+              </View>
+            )
+          }
+        </View>
       )
     }
   }
+
   const onRenderNotice = () => {
     if (noticeEmpty) {
       return (
@@ -128,7 +389,13 @@ const DevelopCustomer = () => {
     }
     else {
       return (
-        <View></View>
+        <ScrollView
+          scrollY={true}
+          style={{
+            height: `calc(100% - 128rpx)`
+          }}
+        >
+        </ScrollView>
       )
     }
   }
@@ -234,7 +501,8 @@ const DevelopCustomer = () => {
         type == 'clue' ? (
           <ScrollView
             style={{
-              height: `calc(100% - 128rpx)`
+              height: `calc(100vh - 128rpx)`,
+              marginTop: '48rpx'
             }}
             scrollY={true}
           >
