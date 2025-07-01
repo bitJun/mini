@@ -1,0 +1,6 @@
+.msg_box {
+    padding-top: 60px;
+    &_main {
+        height: calc(100vh - 60px);
+    }
+}

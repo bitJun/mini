@@ -12,6 +12,7 @@ import { useDidShow } from '@tarojs/taro';
 import {
   assetsItem
 } from './type';
+import fetch from '@/lib/request';
 import styles from './index.module.scss';
 import Arrow1 from '@/assets/generation/arrow1.png';
 import Arrow2 from '@/assets/generation/arrow2.png';
@@ -87,7 +88,17 @@ const Generation = () => {
   useShareMessage();
   useDidShow(() => {
     _checkLogin();
+    onLoadData();
   });
+
+  const onLoadData = () => {
+    fetch.deliveryUserExtension()
+      .then(res=>{
+        const [result, error] = res;
+        if (error || !result) return;
+        console.log('result', result);
+      })
+  }
 
   /**
    * keyword输入事件

@@ -1,3 +1,4 @@
+import { delivery } from '@/store/modules/delivery';
 import request, { IRequestOptions } from './request';
 
 const fetch = {
@@ -923,6 +924,23 @@ const fetch = {
       method: 'GET',
       url: '/customer-msg/message',
       params,
+    } as IRequestOptions),
+  deliveryNoticeList: (params: Fetch.IGetNoticeParams) => 
+    request<Fetch.INoticeRes>({
+      method: 'GET',
+      url: '/home/notices',
+      params
+    } as IRequestOptions),
+  deliveryUserExtension: () => 
+    request<Fetch.INoticeRes>({
+      method: 'GET',
+      url: '/user/IUserExtensionRes'
+    } as IRequestOptions),
+  deliveryCustomerMsg: (params: Fetch.IGetCustomerMsgParams) =>
+    request<Fetch.ICustomerMsgRes>({
+      method: 'GET',
+      url: '/customer-msg/private-msg',
+      params
     } as IRequestOptions),
 };
 export default fetch;

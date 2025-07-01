@@ -113,7 +113,11 @@ const routerMap: IRouterMap = {
   taskList: {
     subPackage: 'tasklist',
     path: 'pages/index' // 任务列表
-  }
+  },
+  msgDetail: {
+    subPackage: 'msgDetail',
+    path: 'pages/subpages/msg/index', //聘用员工
+  },
 };
 
 const getRouter = () => {

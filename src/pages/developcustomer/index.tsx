@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Router, { _checkLogin } from '@/lib/router';
+import Taro from '@tarojs/taro';
 import {
   View,
   Text,
   Image,
   ScrollView
 } from '@tarojs/components';
+import {
+  formatTimeBefore
+} from '@/tools/time';
 import styles from './index.module.scss';
 import fetch from '@/lib/request';
 import filiterIcon from '@/assets/developcustomer/filter.png';
@@ -75,6 +79,16 @@ interface clueItem {
   user: clueUserItem
 }
 
+interface noticeItem {
+  id: number;
+  noticeTitle: string;
+  noticeDesc: string;
+  descValue: string;
+  noticeType: number;
+  readFlag: number;
+  createTime: string;
+}
+
 definePageConfig({
   navigationBarTitleText: "营销发展员工", // 会被动态覆盖
   navigationStyle:"default",
@@ -105,6 +119,7 @@ const DevelopCustomer = () => {
   const noticePage = useRef<number>(1);
   const [hasMoreMsg, setHasMoreMsg] = useState<boolean>(true);
   const [hasMoreClue, setHasMoreClue] = useState<boolean>(true);
+  const [hasMoreNotice, setHasMoreNotice] = useState<boolean>(true);
   const employeePage = useRef<number>(1);
 
   useEffect(()=>{
@@ -146,7 +161,23 @@ const DevelopCustomer = () => {
   }
 
   const onLoadNotiiceList = () => {
-
+    let params = {
+      page_num: noticePage.current
+    }
+    fetch.deliveryNoticeList(params)
+      .then(res=>{
+        const [result, error] = res;
+        if (error || !result) return;
+        let arr:any = [];
+        if (noticePage.current == 1) {
+          arr = result.records;
+        } else {
+          arr = [...noticeList, result.records];
+        }
+        result.records.length < 10 ? setHasMoreNotice(false) : setHasMoreNotice(true);
+        noticePage.current == 1 && result.records.length == 0 ? setNoticeEmpty(true) : setNoticeEmpty(false);
+        setNoticeList(arr);
+      });
   }
 
   /**
@@ -259,6 +290,10 @@ const DevelopCustomer = () => {
                   <View 
                     className={styles['employee_box_item']}
                     key={item.message_id}
+                    onClick={()=>{
+                      console.log(123)
+                      Router.navigate('LIngInt://msgDetail',{ data: { id: item.message_id } });
+                    }}
                   >
                     <Image
                       src={item.my.avatar}
@@ -389,13 +424,30 @@ const DevelopCustomer = () => {
     }
     else {
       return (
-        <ScrollView
-          scrollY={true}
-          style={{
-            height: `calc(100% - 128rpx)`
-          }}
+        <View
+          className={styles['notice_view']}
         >
-        </ScrollView>
+          {
+            noticeList.map((item:noticeItem, index: number)=>{
+              let time = new Date(item.createTime).getTime();
+              return (
+                <View
+                  className={styles['notice_view_box']}
+                  key={item.id}
+                >
+                  <View className={styles['notice_view_box_main']}>
+                    {
+                      item.noticeTitle &&
+                      <View className={styles['notice_view_box_main_title']}>{item.noticeTitle}</View>
+                    }
+                    <View className={styles['notice_view_box_main_content']}>{item.noticeDesc}</View>
+                  </View>
+                  <View className={styles['notice_view_box_time']}>{formatTimeBefore(time)}</View>
+                </View>
+              )
+            })
+          }          
+        </View>
       )
     }
   }
@@ -514,7 +566,8 @@ const DevelopCustomer = () => {
         type == 'notice' ? (
           <ScrollView
             style={{
-              height: `calc(100% - 128rpx)`
+              height: `calc(100% - 128rpx)`,
+              marginTop: '48rpx'
             }}
             scrollY={true}
           >

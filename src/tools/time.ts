@@ -82,3 +82,30 @@ export function getWorkDaysAndTimeSlots(now:Date) {
   };
 }
 
+
+// 发表时间 几秒前 几分前 几小时前
+export function formatTimeBefore(time:number) {
+	let ms = new Date().getTime() - new Date(time).getTime();
+	var days = Math.floor(ms / (1000 * 60 * 60 * 24))
+	var hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+	var minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60))
+	var seconds = Math.floor((ms % (1000 * 60)) / 1000)
+	if (days) {
+		if (days > 7) {
+      return '一周前'
+    } else {
+      return days + '天前'
+    }
+	}
+	if (hours) {
+		return hours + '小时前'
+	}
+	if (minutes) {
+		return minutes + '分钟前'
+	}
+	if (seconds) {
+		return seconds + '秒前'
+	} else {
+		return '刚刚'
+	}
+}

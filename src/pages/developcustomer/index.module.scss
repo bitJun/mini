@@ -349,3 +349,37 @@ page {
     }
   }
 }
+.notice_view {
+  &_box {
+    padding: 40px 32px;
+    border-bottom: 1px solid #F1F1F1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    &_main {
+      width: 588px;
+      &_title {
+        font-family: PingFang SC;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 100%;
+        color: #000000;
+        margin-bottom: 24px;
+      }
+      &_content {
+        font-family: PingFang SC;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 140%;
+        color: #000000;
+      }
+    }
+    &_time {
+      font-family: PingFang SC;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 140%;
+      color: #000000;
+    }
+  }
+}

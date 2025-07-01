@@ -470,9 +470,9 @@ declare global {
       platform: number;
       content: string;
       publish_time: string;
-      user: Array<IDeliverCustomerMessageItemUser>;
-      work: Array<IDeliverCustomerMessageItemWork>;
-      my: Array<IDeliverCustomerMessageItemMy>;
+      user: IDeliverCustomerMessageItemUser;
+      work: IDeliverCustomerMessageItemWork;
+      my: IDeliverCustomerMessageItemMy;
     };
     type IDeliverCustomerMessageRes = {
       records:IDeliverCustomerMessageItem[],
@@ -990,6 +990,38 @@ declare global {
     }
     type IGetDelSendCodeParams = { phone: string;platform:string};
     type IGetDelLoginParams = { phone: string;platform:string;code:string};
+    type IGetNoticeParams = {page_num: number};
+    type INoticeItem = {
+      id: number;
+      noticeTitle: string;
+      noticeDesc: string;
+      descValue: string;
+      noticeType: number;
+      readFlag: number;
+      createTime: string;
+    }
+    type INoticeRes = {
+      records:INoticeItem[],
+      total:number
+    };
+    type IUserExtensionRes = {
+      asset_library_update_time: string
+    }
+    type IGetCustomerMsgParams = {
+      conversation_id: number;
+      page_num: number;
+      page_size: number;
+    }
+    type ICustomerMsgItem = {
+      private_msg_id: number;
+      content: string;
+      publish_time: string;
+      is_from_user: number;
+    }
+    type ICustomerMsgRes = {
+      records: ICustomerMsgItem[],
+      total: number
+    }
   }
 }
 
