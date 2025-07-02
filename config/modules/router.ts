@@ -116,7 +116,19 @@ const routerMap: IRouterMap = {
   },
   msgDetail: {
     subPackage: 'developcustomer',
-    path: 'pages/index', //聘用员工
+    path: 'pages/index', //私信详情
+  },
+  productList: {
+    subPackage: 'product',
+    path: 'pages/index', // 产品列表
+  },
+  productDetail: {
+    subPackage: 'product',
+    path: 'pages/detail', // 产品详情
+  },
+  productPublish: {
+    subPackage: 'product',
+    path: 'pages/publish', // 产品库发布
   },
 };
 

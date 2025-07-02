@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import useShareMessage from '@/hooks/useShareMessage';
-import { _checkLogin } from '@/lib/router';
+import Router, { _checkLogin } from '@/lib/router';
 import {
   View,
   Image,
@@ -55,6 +55,7 @@ const Generation = () => {
       bg: ProductIcon,
       color: '#53B7EE',
       arrow: Arrow1,
+      url: 'productList'
     },
     {
       id: 2,
@@ -64,6 +65,7 @@ const Generation = () => {
       bg: SucaiIcon,
       color: '#F38BCE',
       arrow: Arrow2,
+      url: 'productList'
     },
     {
       id: 3,
@@ -73,6 +75,7 @@ const Generation = () => {
       bg: ZhishikuIcon,
       color: '#FFCA7E',
       arrow: Arrow3,
+      url: 'productList'
     },
     {
       id: 4,
@@ -82,6 +85,7 @@ const Generation = () => {
       bg: ShebeiIcon,
       color: '#9C8FF3',
       arrow: Arrow4,
+      url: 'productList'
     },
   ]
 
@@ -199,6 +203,9 @@ const Generation = () => {
                     key={index}
                     style={{
                       backgroundColor: item.color,
+                    }}
+                    onClick={()=>{
+                      Router.navigate('LIngInt://productList');
                     }}
                   >
                     <Image

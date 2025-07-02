@@ -6,4 +6,5 @@ export interface assetsItem {
   bg: any,
   color: string,
   arrow: any,
+  url: string
 }

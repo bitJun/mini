@@ -311,7 +311,6 @@ const DevelopCustomer = () => {
                       className={styles['employee_box_item']}
                       key={item.message_id}
                       onClick={()=>{
-                        console.log(123)
                         Router.navigate('LIngInt://msgDetail',{ data: { id: item.original_id, myAvatar: item.my.avatar, userAvatar: item.user.avatar } });
                       }}
                     >
