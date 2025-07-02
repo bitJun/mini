@@ -1008,7 +1008,7 @@ declare global {
       asset_library_update_time: string
     }
     type IGetCustomerMsgParams = {
-      conversation_id: number;
+      conversation_id: string | number;
       page_num: number;
       page_size: number;
     }

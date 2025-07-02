@@ -115,8 +115,8 @@ const routerMap: IRouterMap = {
     path: 'pages/index' // 任务列表
   },
   msgDetail: {
-    subPackage: 'msgDetail',
-    path: 'pages/subpages/msg/index', //聘用员工
+    subPackage: 'developcustomer',
+    path: 'pages/index', //聘用员工
   },
 };
 
