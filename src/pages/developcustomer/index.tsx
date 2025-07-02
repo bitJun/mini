@@ -461,6 +461,7 @@ const DevelopCustomer = () => {
           {
             noticeList.map((item:noticeItem, index: number)=>{
               let time = new Date(item.createTime).getTime();
+              let noticeDesc = item.noticeDesc.replace('[{}]', `<span style="color: #542AFE">${item.descValue}</span>`);
               return (
                 <View
                   className={styles['notice_view_box']}
@@ -471,7 +472,12 @@ const DevelopCustomer = () => {
                       item.noticeTitle &&
                       <View className={styles['notice_view_box_main_title']}>{item.noticeTitle}</View>
                     }
-                    <View className={styles['notice_view_box_main_content']}>{item.noticeDesc}</View>
+                    <RichText
+                      nodes={noticeDesc}
+                    />
+                    {/* <View className={styles['notice_view_box_main_content']}>
+                      {noticeDesc.replace('[{}]', `<Text style="color: #542AFE">${item.descValue}</Text>`)}
+                    </View> */}
                   </View>
                   <View className={styles['notice_view_box_time']}>{formatTimeBefore(time)}</View>
                 </View>
