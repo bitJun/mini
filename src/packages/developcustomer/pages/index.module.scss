@@ -1,0 +1,42 @@
+.msg_box {
+    padding: 0 32px;
+    &_main {
+        height: calc(100vh - 60px);
+        margin-top: 60px;
+    }
+    &_item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 64px;
+        &_avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 100%;
+            margin-right: 16px;
+            
+        }
+        &_main {
+            width: 412px;
+            box-sizing: border-box;
+            padding: 24px;
+            border-radius: 24px;
+            box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.05);
+            font-family: PingFang SC;
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 140%;
+            color: #000000;
+        }
+    }
+}
+.reverse {
+    display: flex;
+    flex-direction: row-reverse;
+    .msg_box_item_avatar {
+        margin-left: 16px;
+        margin-right: 0;
+    }
+    .msg_box_item_main {
+        background: #F2F1FF;
+    }
+}

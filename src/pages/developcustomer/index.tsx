@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Router, { _checkLogin } from '@/lib/router';
-import Taro from '@tarojs/taro';
 import {
   View,
   Text,
   Image,
-  ScrollView
+  ScrollView,
+  RichText
 } from '@tarojs/components';
 import {
   formatTimeBefore
@@ -234,6 +234,18 @@ const DevelopCustomer = () => {
     setEmployeeId(id);
   }
 
+  const isJSON = (str) => {
+    if (typeof str !== 'string') {
+      return false;
+    }
+    try {
+      const result = JSON.parse(str);
+      return typeof result === 'object' && result !== null;
+    } catch (e) {
+      return false;
+    }
+  }
+
   const onRenderMsg = () => {
     return (
       <View className={styles['employee_box']}>
@@ -286,31 +298,50 @@ const DevelopCustomer = () => {
               }}
             >
               {
-                msgList.map((item: msgItem) =>
-                  <View 
-                    className={styles['employee_box_item']}
-                    key={item.message_id}
-                    onClick={()=>{
-                      console.log(123)
-                      Router.navigate('LIngInt://msgDetail',{ data: { id: item.message_id } });
-                    }}
-                  >
-                    <Image
-                      src={item.my.avatar}
-                      className={styles['employee_box_item_img']}
-                    />
-                    <View className={styles['employee_box_item_main']}>
-                      <View className={styles['employee_box_item_main_info']}>
-                        <View className={styles['employee_box_item_main_info_left']}>
-                          <Text className={styles['employee_box_item_main_info_user']}>{item.user.nickname}</Text>
-                          {item.message_type == 1 ? '私信了你' : '回复了你的评论'}
+                msgList.map((item: msgItem) =>{
+                  let msg = '';
+                  if (isJSON(item.content)) {
+                    msg = JSON.parse(item.content).text;
+                  } else {
+                    msg = item.content;
+                  }
+                  console.log(isJSON(item.content));
+                  return (
+                    <View 
+                      className={styles['employee_box_item']}
+                      key={item.message_id}
+                      onClick={()=>{
+                        console.log(123)
+                        Router.navigate('LIngInt://msgDetail',{ data: { id: item.original_id, myAvatar: item.my.avatar, userAvatar: item.user.avatar } });
+                      }}
+                    >
+                      <Image
+                        src={item.my.avatar}
+                        className={styles['employee_box_item_img']}
+                      />
+                      <View className={styles['employee_box_item_main']}>
+                        <View className={styles['employee_box_item_main_info']}>
+                          <View className={styles['employee_box_item_main_info_left']}>
+                            <Text className={styles['employee_box_item_main_info_user']}>{item.user.nickname}</Text>
+                            {item.message_type == 1 ? '私信了你' : '回复了你的评论'}
+                          </View>
+                          <View></View>
                         </View>
-                        <View></View>
+                        {
+                          isJSON(item.content) ? (
+                            <RichText
+                              className={styles['employee_box_item_main_content']}
+                              nodes={msg}
+                            />
+                          ) : (
+                            <View className={styles['employee_box_item_main_content']}>{item.content}</View>
+                          )
+                        }
+                        
                       </View>
-                      <View className={styles['employee_box_item_main_content']}>{item.content}</View>
                     </View>
-                  </View>
-                )
+                  )
+                })
               }
             </ScrollView>
           )
