@@ -1022,6 +1022,36 @@ declare global {
       records: ICustomerMsgItem[],
       total: number
     }
+    type IGetCustomerPropertyParams = {
+      keyword: string;
+    }
+    type ICustomerPropertyItem = {
+      id: number;
+      name: string;
+      label: Array<string>;
+      image_url: string;
+      category_text: string;
+    }
+    type ICustomerKnowledgesItem = {
+      id: number;
+      title: string;
+      content: string;
+    }
+    type ICustomerMaterialsItem = {
+      id: number;
+      image_url: string;
+      label: Array<string>;
+    }
+    type ICustomerPropertyResProps = {
+      knowledges: ICustomerKnowledgesItem[],
+      products: ICustomerPropertyItem[],
+      materials: ICustomerMaterialsItem[],
+    }
+    type ICustomerPropertyRes = {
+      knowledges: ICustomerKnowledgesItem[],
+      products: ICustomerPropertyItem[],
+      materials: ICustomerMaterialsItem[],
+    }
   }
 }
 

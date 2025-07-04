@@ -119,6 +119,10 @@ const Generation = () => {
     setKeyword('');
   };
 
+  const onSearch = () => {
+    Router.navigate('LIngInt://generationSearch');
+  }
+
   return (
     <View className={styles.generation}>
       <View className={styles['generation_digital']}>
@@ -135,27 +139,19 @@ const Generation = () => {
           className={styles['generation_digital_icon']}
         />
       </View>
-      <View className={styles['generation_box']}>
+      <View 
+        className={styles['generation_box']}
+        onClick={()=>{onSearch()}}
+      >
         <Image
           src={SearchIcon}
           className={styles['generation_box_icon']}
         />
-        <Input
-          className={styles['generation_box_search']}
-          placeholder='告诉我，你想寻找什么...'
-          value={keyword}
-          onInput={(e)=>{onChange(e)}}
-          placeholderClass={styles.placeholder}
-        />
-        {
-          keyword ? (
-            <Image
-              src={ClearIcon}
-              className={styles['generation_box_clear']}
-              onClick={()=>{onClear()}}
-            />
-          ) : null
-        }
+        <View
+          className={`${styles['generation_box_search']} ${styles.placeholder}`}
+        >
+          告诉我，你想寻找什么...
+        </View>
       </View>
       <ScrollView
         className={styles['generation_tags']}

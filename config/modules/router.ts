@@ -130,6 +130,14 @@ const routerMap: IRouterMap = {
     subPackage: 'product',
     path: 'pages/publish', // 产品库发布
   },
+  generationSearch: {
+    subPackage: 'generation',
+    path: 'pages/search', // 创作搜索
+  },
+  materials: {
+    subPackage: 'materials',
+    path: 'pages/index', // 素材
+  }
 };
 
 const getRouter = () => {

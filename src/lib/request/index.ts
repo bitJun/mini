@@ -942,5 +942,11 @@ const fetch = {
       url: '/customer-msg/private-msg',
       params
     } as IRequestOptions),
+  deliveryCustomerQueryProperty: (params: Fetch.IGetCustomerPropertyParams) =>
+    request<Fetch.ICustomerPropertyRes>({
+      method: 'GET',
+      url: '/item/property',
+      params
+    } as IRequestOptions)
 };
 export default fetch;
