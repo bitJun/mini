@@ -137,6 +137,9 @@ const Generation = () => {
         <Image
           src={RanageIcon}
           className={styles['generation_digital_icon']}
+          onClick={()=>{
+            Router.navigate('LIngInt://enterprise');
+          }}
         />
       </View>
       <View 

@@ -137,6 +137,10 @@ const routerMap: IRouterMap = {
   materials: {
     subPackage: 'materials',
     path: 'pages/index', // 素材
+  },
+  enterprise: {
+    subPackage: 'enterprise',
+    path: 'pages/index', // 企业
   }
 };
 
