@@ -65,7 +65,7 @@ const ProductList = () => {
      * 手动添加
      */
     const onManuallyAdd = () => {
-
+      Router.navigate('LIngInt://productPublish');
     }
 
     /**
