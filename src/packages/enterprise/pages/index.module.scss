@@ -96,6 +96,34 @@
                 height: 40px;
             }
         }
+        &_box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 108px;
+            background: #F9F9F9F9;
+            border-radius: 24px;
+            padding: 0 30px;
+            box-sizing: border-box;
+            margin-bottom: 24px;
+            &_label {
+                font-family: PingFang SC;
+                font-weight: 400;
+                font-style: Regular;
+                font-size: 28px;
+                color: #333333;
+            }
+            &_val {
+                font-family: PingFang SC;
+                font-weight: 400;
+                font-style: Regular;
+                font-size: 28px;
+                color: #666666;
+            }
+        }
+        &_box:last-child {
+            margin-bottom: 0;
+        }
         &_tags {
             display: flex;
             flex-wrap: wrap;

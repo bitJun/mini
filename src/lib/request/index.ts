@@ -947,6 +947,17 @@ const fetch = {
       method: 'GET',
       url: '/item/property',
       params
+    } as IRequestOptions),
+  queryEnterpriseInfo: () =>
+    request<Fetch.IEnterpriseInfoRes>({
+      method: 'GET',
+      url: '/company/info',
+    } as IRequestOptions),
+  updateEnterpriseInfo: (params: Fetch.IEnterpriseInfoRes) =>
+    request<Fetch.IEnterpriseInfoRes>({
+      method: 'PUT',
+      url: '/company/info',
+      params
     } as IRequestOptions)
 };
 export default fetch;

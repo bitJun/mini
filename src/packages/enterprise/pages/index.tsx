@@ -26,6 +26,17 @@ definePageConfig({
   enableShareTimeline: true
 });
 
+interface IEnterpriseInfoRes {
+    company_name: string;
+    contact_phone: string;
+    company_address: string;
+    category_parent_id: number;
+    category_id: number;
+    company_description: string;
+    main_business: string;
+    logo: string
+}
+
 const Enterprise = () => {
 
     const [show, setShow] = useState<boolean>(false);
@@ -37,10 +48,30 @@ const Enterprise = () => {
     const [industry, setIndustry] = useState<string>('');
     const [business, setBusiness] = useState<string>('');
     const [industryList, setIndustryList] = useState<string[]>(['全屋定制', '家具']);
+    const [enterpriseInfo, setEnterpriseInfo] = useState<IEnterpriseInfoRes>({
+        company_name: '',
+        contact_phone: '',
+        company_address: '',
+        category_parent_id: 0,
+        category_id: 0,
+        company_description: '',
+        main_business: '',
+        logo: ''
+    })
 
     useEffect(()=>{
-
+        onLoadInfo();
     }, []);
+
+    const onLoadInfo = () => {
+        fetch.queryEnterpriseInfo()
+            .then(res=>{
+                const [result, error] = res;
+                if (error || !result) return;
+                console.log('result', result);
+                setEnterpriseInfo(result);
+            })
+    }
 
     /**
      * 点击企业logo
@@ -87,20 +118,24 @@ const Enterprise = () => {
                     />
                 </View>
                 <View className={styles['enterprise_box_info_name']}>
-                    AlnDlm
+                    {enterpriseInfo?.company_name || ''}
                 </View>
                 <View className={styles['enterprise_box_info_concat']}>
                     联系方式
-                    <Text className={styles['enterprise_box_info_concat_value']}>(684) 555-0102</Text>
+                    <Text className={styles['enterprise_box_info_concat_value']}>
+                        {enterpriseInfo?.contact_phone || ''}
+                    </Text>
                 </View>
                 <View className={styles['enterprise_box_info_address']}>
                     地址：
-                    <Text className={styles['enterprise_box_info_address_value']}>北京市朝阳区星地中心B座</Text>
+                    <Text className={styles['enterprise_box_info_address_value']}>
+                        {enterpriseInfo?.company_address || ''}
+                    </Text>
                 </View>
             </View>
             <View className={styles['enterprise_box_section']}>
                 <View className={styles['enterprise_box_section_title']}>
-                    所属行业
+                    行业类目
                     <Image
                         src={editImg}
                         className={styles['enterprise_box_section_title_icon']}
@@ -109,34 +144,17 @@ const Enterprise = () => {
                         }}
                     />
                 </View>
-                <View className={styles['enterprise_box_section_tags']}>
-                    {
-                        industryList && industryList.map((item: string, index: number)=>
-                            <View
-                                className={styles['enterprise_box_section_tags_item']}
-                                key={index}
-                            >
-                                {item}
-                                {
-                                    industryEdit &&
-                                    <Image
-                                        src={removeIcon}
-                                        className={styles['enterprise_box_section_tags_item_icon']}
-                                    />
-                                }
-                            </View>
-                        )
-                    }
-                    {
-                        industryEdit &&
-                        <Image
-                            src={addIcon}
-                            className={styles['enterprise_box_section_tags_add']}
-                            onClick={()=>{
-                                setVisable1(true)
-                            }}
-                        />
-                    }
+                <View className={styles['enterprise_box_section_box']}>
+                    <View className={styles['enterprise_box_section_box_label']}>所属行业</View>
+                    <View className={styles['enterprise_box_section_box_val']}>
+                        {enterpriseInfo?.contact_phone || ''}
+                    </View>
+                </View>
+                <View className={styles['enterprise_box_section_box']}>
+                    <View className={styles['enterprise_box_section_box_label']}>所属类目</View>
+                    <View className={styles['enterprise_box_section_box_val']}>
+                        {enterpriseInfo?.contact_phone || ''}
+                    </View>
                 </View>
             </View>
             <View className={styles['enterprise_box_section']}>
@@ -150,8 +168,11 @@ const Enterprise = () => {
                         }}
                     />
                 </View>
+                <View>
+                    {enterpriseInfo?.company_description || ''}
+                </View>
             </View>
-            <View className={styles['enterprise_box_section']}>
+            {/* <View className={styles['enterprise_box_section']}>
                 <View className={styles['enterprise_box_section_title']}>
                     主营业务
                     <Image
@@ -162,8 +183,10 @@ const Enterprise = () => {
                         }}
                     />
                 </View>
-                <View className={styles['enterprise_box_section_item']}>门窗定制</View>
-            </View>
+                <View className={styles['enterprise_box_section_item']}>
+                    {enterpriseInfo?.main_business || ''}
+                </View>
+            </View> */}
             <View className={styles['enterprise_box_tip']}>
                 更多个人信息可以到PC端进行配置～
             </View>

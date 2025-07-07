@@ -1052,6 +1052,16 @@ declare global {
       products: ICustomerPropertyItem[],
       materials: ICustomerMaterialsItem[],
     }
+    type IEnterpriseInfoRes = {
+      company_name: string,
+      contact_phone: string,
+      company_address: string,
+      category_parent_id: number,
+      category_id: number,
+      company_description: string,
+      main_business: string,
+      logo: string
+    }
   }
 }
 
