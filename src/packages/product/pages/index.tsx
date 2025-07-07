@@ -7,6 +7,7 @@ import {
   ScrollView,
   Input
 } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 import fetch from '@/lib/request';
 import styles from './index.module.scss';
 import SearchIcon from '@/assets/generation/search.png';
@@ -24,8 +25,30 @@ interface menuProps {
   name: string;
 }
 
+interface ProductItem {
+  id: number;
+  category: number;
+  color: string;
+  description: string;
+  item_type: string;
+  material: string;
+  name: string;
+  price: string;
+  property: string;
+  size: string;
+  label: string[];
+  images: {
+    http_img_path: string;
+    id: number;
+    img_path: string;
+  }[];
+  item_url: { commission: string; display_mode: string; platform: string; url: string }[];
+  save_vector_status:number,
+  selected?: boolean
+}
+
 const ProductList = () => {
-    const [list, setList] = useState([1,2,3,4,5,6]);
+    const [list, setList] = useState<Array<ProductItem>>([]);
     const page = useRef(1);
     const [hasMore, setHasMore] = useState<boolean>(true);
     const [isEmpty, setIsEmpty] = useState<boolean>(false);
@@ -33,6 +56,7 @@ const ProductList = () => {
     const [visable, setVisable] = useState<boolean>(false);
     const [visable1, setVisable1] = useState<boolean>(false);
     const [link, setLink] = useState<string>('');
+    const [flag, setFlag] = useState<boolean>(true);
 
     const menuList: menuProps[] = [
       {
@@ -56,9 +80,30 @@ const ProductList = () => {
     ]
 
     useEffect(()=>{
+      onLoadData();
     }, []);
 
     const onLoadData = () => {
+      let params = {
+        page_num: page.current,
+        page_size: 10,
+        search_text: '',
+        fetch_all: false
+      }
+      fetch.queryProductList(params)
+        .then(res=>{
+          const [result, error] = res;
+          if (error || !result) return;
+          let arr:any = [];
+          if (page.current == 1) {
+            arr = result.records;
+          } else {
+            arr = [...list, ...result.records];
+          }
+          setList(arr);
+          result.records.length < 10 ? setHasMore(false) : setHasMore(true);
+          page.current == 1 && result.records.length == 0 ? setIsEmpty(true) : setIsEmpty(false);
+        })
     }
 
     /**
@@ -73,6 +118,38 @@ const ProductList = () => {
      */
     const onPasteLink = () => {
       setVisable1(true)
+    }
+
+    const onShowDetail = (id) => {
+      Router.navigate('LIngInt://productDetail',{ data: { id: id } });
+    }
+
+    const onAddLink = () => {
+      if (!link) {
+        Taro.showToast({
+          title: '请输入链接',
+          icon: 'none'
+        });
+        return;
+      }
+      if (flag) {
+        setFlag(false);
+        fetch.postProductThirdUrl({url: link})
+          .then(res=>{
+            const [result, error] = res;
+            if (error || !result) return;
+            console.log('result', result);
+            Taro.showToast({
+              title: '添加成功',
+              icon: 'none'
+            });
+            page.current = 1;
+            onLoadData();
+            setVisable1(false);
+            setLink('');
+            setFlag(true);
+          })
+      }
     }
 
     return (
@@ -120,22 +197,33 @@ const ProductList = () => {
         >
           <View className={styles['product_box_main_info']}>
             {
-              list.map((item:any)=>
+              list.map((item:ProductItem, index: number)=>
                 <View
                   className={styles['product_box_main_section']}
-                  key={item}
+                  key={item.id * index}
+                  onClick={()=>{
+                    onShowDetail(item?.id)
+                  }}
                 >
                   <View className={styles['product_box_main_section_tag']}>化妆品</View>
                   <Image
-                    src={'https://gips3.baidu.com/it/u=4216096237,1736217090&fm=3026&app=3026&size=r3,4&q=75&n=0&g=4n&f=JPEG&fmt=auto&maxorilen2heic=2000000?s=F2B054CF4662875B50904D2203008041'}
+                    src={item?.images?.[0]?.http_img_path || ''}
                     className={styles['product_box_main_section_img']}
                     mode='aspectFill'
                   />
                   <View className={styles['product_box_main_section_container']}>
-                    <View className={styles['product_box_main_section_container_name']}>能量提神臻享抹茶胶囊 · Joy系列</View>
+                    <View className={styles['product_box_main_section_container_name']}>{item?.name || ''}</View>
                     <View className={styles['product_box_main_section_container_info']}>
-                      <View className={styles['product_box_main_section_container_info_item']}>#护肤品</View>
-                      <View className={styles['product_box_main_section_container_info_item']}>#高倍防晒</View>
+                      {
+                        item?.label && item?.label.map((label: string, key: number) =>
+                          <View 
+                            className={styles['product_box_main_section_container_info_item']}
+                            key={key}
+                          >
+                            #{label}
+                          </View>
+                        )
+                      }
                     </View>
                   </View>
                 </View>
@@ -214,6 +302,7 @@ const ProductList = () => {
                 <View
                   className={`${styles['enterprise_introduce_action_item']} ${styles['cancel']}`}
                   onClick={()=>{
+                    setLink('');
                     setVisable1(false);
                   }}
                 >
@@ -221,6 +310,9 @@ const ProductList = () => {
                 </View>
                 <View
                   className={`${styles['enterprise_introduce_action_item']} ${styles['sure']}`}
+                  onClick={()=>{
+                    onAddLink()
+                  }}
                 >
                   确定
                 </View>

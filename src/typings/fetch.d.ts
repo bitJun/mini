@@ -209,7 +209,8 @@ declare global {
       item_id: any;
       item_info: any;
     }[];
-    type IQueryProductListParams = { page_size: number; page_num: number; fetch_all: boolean };
+    type IQueryProductThirdUrlParams = { url: string };
+    type IQueryProductListParams = { page_size: number; page_num: number; fetch_all: boolean, search_text: string };
     type IQueryProductListRes = IPaging & {
       records: {
         id: number;

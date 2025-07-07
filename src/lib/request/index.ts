@@ -266,6 +266,13 @@ const fetch = {
       url: '/item',
       params,
     } as IRequestOptions),
+  /** 粘贴三方商品链接，产品入库 */
+  postProductThirdUrl: (params: Fetch.IQueryProductThirdUrlParams) =>
+    request<Fetch.IQueryProductListRes>({
+      method: 'POST',
+      url: '/item/third_url',
+      params,
+    } as IRequestOptions),
   /** 获取已存储的图片和视频 */
   queryImagePage: (params: Fetch.IQueryImagePageParams) =>
     request<Fetch.IQueryImagePageRes>({
