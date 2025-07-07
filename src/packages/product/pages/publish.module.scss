@@ -1,0 +1,36 @@
+.product_publish {
+    &_main {
+        height: calc(100vh - 172px);
+    }
+    &_action {
+        position: fixed;
+        left: 0;
+        padding-bottom: 68px;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &_item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 104px;
+            box-sizing: border-box;
+            font-family: PingFang SC;
+            font-weight: 600;
+            font-style: Semibold;
+            font-size: 32px;
+            border-radius: 188px;
+        }
+        &_item.cancel {
+            width: 252px;
+            border: 2px solid #999999;
+            color: #999999;
+        }
+        &_item.sure {
+            background: #000000;
+            color: #ffffff;
+            margin-left: 24px;
+        }
+    }
+}
