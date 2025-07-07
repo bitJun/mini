@@ -934,7 +934,7 @@ const fetch = {
   deliveryUserExtension: () => 
     request<Fetch.INoticeRes>({
       method: 'GET',
-      url: '/user/IUserExtensionRes'
+      url: '/IUserExtensionRes'
     } as IRequestOptions),
   deliveryCustomerMsg: (params: Fetch.IGetCustomerMsgParams) =>
     request<Fetch.ICustomerMsgRes>({
