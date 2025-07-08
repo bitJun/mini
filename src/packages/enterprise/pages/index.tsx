@@ -16,6 +16,7 @@ import editImg from '@/assets/enterprise/edit.png';
 import photoIcon from '@/assets/enterprise/photo.png';
 import removeIcon from '@/assets/enterprise/remove.png';
 import addIcon from '@/assets/enterprise/add.png';
+import checkIcon from '@/assets/enterprise/check.png';
 import styles from './index.module.scss';
 
 definePageConfig({
@@ -43,6 +44,7 @@ const Enterprise = () => {
     const [visable, setVisable] = useState<boolean>(false);
     const [visable1, setVisable1] = useState<boolean>(false);
     const [visable2, setVisable2] = useState<boolean>(false);
+    const [isEditInfo, setIsEditInfo] = useState<boolean>(false);
     const [industryEdit, setIndustryEdit] = useState<boolean>(false);
     const [introduce, setIntroduce] = useState<string>('');
     const [industry, setIndustry] = useState<string>('');
@@ -63,6 +65,9 @@ const Enterprise = () => {
         onLoadInfo();
     }, []);
 
+    /**
+     * 获取企业信息
+     */
     const onLoadInfo = () => {
         fetch.queryEnterpriseInfo()
             .then(res=>{
@@ -70,6 +75,15 @@ const Enterprise = () => {
                 if (error || !result) return;
                 console.log('result', result);
                 setEnterpriseInfo(result);
+            })
+    }
+
+    const onLoadCategory = () => {
+        fetch.queryCategory()
+            .then(res=>{
+                const [result, error] = res;
+                if (error || !result) return;
+                console.log('result', result);
             })
     }
 
@@ -94,6 +108,31 @@ const Enterprise = () => {
         })
     }
 
+    /**
+     * 基本信息输入
+     * @param type
+     * @param event 
+     */
+    const onChangeVal = (type:string, event:any) => {
+        let value = event.detail.value;
+        let data = {
+            ...enterpriseInfo
+        }
+        data[type] = value;
+        setEnterpriseInfo(data);
+    }
+
+    /**
+     * 基本信息编辑
+     */
+    const onEdit = () => {
+        if (isEditInfo) {
+
+        } else {
+            setIsEditInfo(true);
+        }
+    }
+
     return (
         <ScrollView
             scrollY
@@ -101,8 +140,11 @@ const Enterprise = () => {
         >
             <View className={styles['enterprise_box_info']}>
                 <Image
-                    src={editIcon}
+                    src={isEditInfo ? checkIcon : editIcon}
                     className={styles['enterprise_box_info_edit']}
+                    onClick={()=>{
+                        onEdit()
+                    }}
                 />
                 <View
                     className={styles['enterprise_box_info_logo']}
@@ -117,20 +159,38 @@ const Enterprise = () => {
                         className={styles['enterprise_box_info_logo_icon']}
                     />
                 </View>
-                <View className={styles['enterprise_box_info_name']}>
+                <Input
+                    className={styles['enterprise_box_info_name']}
+                    disabled={isEditInfo}
+                    value={enterpriseInfo?.company_name}
+                    onInput={(e)=>{onChangeVal('company_name', e)}}
+                />
+                {/* <View className={styles['enterprise_box_info_name']}>
                     {enterpriseInfo?.company_name || ''}
-                </View>
+                </View> */}
                 <View className={styles['enterprise_box_info_concat']}>
                     联系方式
-                    <Text className={styles['enterprise_box_info_concat_value']}>
+                    <Input
+                        className={styles['enterprise_box_info_concat_value']}
+                        disabled={isEditInfo}
+                        value={enterpriseInfo?.contact_phone}
+                        onInput={(e)=>{onChangeVal('contact_phone', e)}}
+                    />
+                    {/* <Text className={styles['enterprise_box_info_concat_value']}>
                         {enterpriseInfo?.contact_phone || ''}
-                    </Text>
+                    </Text> */}
                 </View>
                 <View className={styles['enterprise_box_info_address']}>
                     地址：
-                    <Text className={styles['enterprise_box_info_address_value']}>
+                    <Input
+                        className={styles['enterprise_box_info_concat_value']}
+                        disabled={isEditInfo}
+                        value={enterpriseInfo?.company_address}
+                        onInput={(e)=>{onChangeVal('company_address', e)}}
+                    />
+                    {/* <Text className={styles['enterprise_box_info_address_value']}>
                         {enterpriseInfo?.company_address || ''}
-                    </Text>
+                    </Text> */}
                 </View>
             </View>
             <View className={styles['enterprise_box_section']}>

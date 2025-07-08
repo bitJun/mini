@@ -965,6 +965,12 @@ const fetch = {
       method: 'PUT',
       url: '/company/info',
       params
+    } as IRequestOptions),
+  queryCategory: () => {
+    request<Fetch.IEnterpriseInfoRes>({
+      method: 'GET',
+      url: '/user/category'
     } as IRequestOptions)
+  }
 };
 export default fetch;
